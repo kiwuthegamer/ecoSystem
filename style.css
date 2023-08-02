@@ -1,0 +1,38 @@
+body {
+  background-color: black;
+  user-select: none;
+}
+
+#main, #gmain {
+  background-color: #9bc949;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: 100vh;
+  height: 70vh;
+  outline: solid white 0.4vw;
+}
+
+#main > img {
+  position: absolute;
+  width: 5vh;
+  height: 5vh;
+  transform: translate(-50%, -50%);
+}
+
+#gmain {
+  position: absolute;
+  opacity: 0.1;
+  outline: none;
+}
+
+#pausePlay {
+  width: 60px;
+  height: 60px;
+  font-size: 40px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  translate: -50%;
+}
