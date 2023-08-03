@@ -3,42 +3,35 @@ tileData = {
     "movementSpeed": 0,
     "prey": [],
     "predators": [],
-    "stats": {
-      "hunger": 0.0,
-      "health": 5.0
-    }
+    "stamina": 0
   },
   "rabbit": {
     "movementSpeed": 3,
     "prey": ["grass"],
     "predators": ["fox"],
-    "stats": {
-      "hunger": 0.0,
-      "health": 5.0
-    }
+    "stamina": 5
   },
   "fox": {
     "movementSpeed": 2,
     "prey": ["rabbit"],
     "predators": [],
-    "stats": {
-      "hunger": 0.0,
-      "health": 8.0
-    }
+    "stamina": 6
   }
 }
 
 class AnimalStats {
-  constructor(name) {
-    this.health = tileData[name]["stats"]["health"]
-    this.hunger = tileData[name]["stats"]["hunger"]
+  constructor() {
+    this.health = 5.0 // 5 = Full, 0 = Dead
+    this.hunger = 5.0 // 5 = Not Hungry, 0 = Starving
+    this.saturation = 20.0 // 20 = Full
+    this.exhaustion = 0.0 // 0 = Fine, 9.9 = Tired; Resets at 10
   }
 }
 
 class Animal {
-  constructor(tileRef, tileId, stats) {
+  constructor(tileRef, tileId) {
     this.tileRef = tileRef
     this.tileId = tileId
-    this.stats = stats
+    this.stats = new AnimalStats()
   }
 }

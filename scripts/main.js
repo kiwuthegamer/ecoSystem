@@ -1,3 +1,5 @@
+let round = (num, n) => parseFloat(num.toFixed(n))
+
 var pausePlayButton = document.createElement("button")
 pausePlayButton.id = "pausePlay"
 pausePlayButton.innerText = "⏵"

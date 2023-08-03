@@ -33,7 +33,7 @@ ghostMainElem.onclick = function(e){
   var tileId = setTileSrc(tile)
   tile.draggable = false
   moveTileToMouse(tile, e)
-  tileList.push( new Animal( tile, tileId, new AnimalStats(tiles[tileId]) ) )
+  tileList.push( new Animal( tile, tileId ) )
   mainElem.appendChild(tile)
 }
 
