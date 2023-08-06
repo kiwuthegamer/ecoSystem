@@ -9,7 +9,7 @@ tileData = {
     "movementSpeed": 3,
     "prey": ["grass"],
     "predators": ["fox"],
-    "stamina": 5
+    "stamina": 5,
   },
   "fox": {
     "movementSpeed": 2,
