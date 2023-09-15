@@ -65,7 +65,7 @@ function animalAI(gameData, animalIdx){
     if(i == animalIdx) continue
 
     distanceToAnimal = distance(animalXY, getAnimalXY(gameData, i))
-    // if (distanceToAnimal > animalData["viewDist"]) continue
+    if (distanceToAnimal > animalData["viewDist"]) continue
     
     if( animalData["predators"].includes( tiles[gameData[i].tileId] ) ){
       predators.push(getAnimalXY(gameData, i))
@@ -81,6 +81,8 @@ function animalAI(gameData, animalIdx){
 
   if( predators.length>0 || prey.length>0 ){
     xyChange = movementAI(animalXY, predators, prey)
+  } else {
+    xyChange = [rand(-4, 4), rand(-4, 4)]
   }
 
   multiplier = animalData["movementSpeed"] * round(animalStats.hunger / 5, 2)

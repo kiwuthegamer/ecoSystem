@@ -3,19 +3,22 @@ tileData = {
     "movementSpeed": 0,
     "prey": [],
     "predators": [],
-    "stamina": 0
+    "stamina": 0,
+    "viewDist": 0
   },
   "rabbit": {
     "movementSpeed": 3,
     "prey": ["grass"],
     "predators": ["fox"],
     "stamina": 5,
+    "viewDist": 360
   },
   "fox": {
     "movementSpeed": 2,
     "prey": ["rabbit"],
     "predators": [],
-    "stamina": 6
+    "stamina": 6,
+    "viewDist": 300
   }
 }
 
