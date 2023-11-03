@@ -40,7 +40,7 @@ function movementAI(animalPosition, predatorPositions, preyPositions){
   if(nearestPreyDistance < nearestPredatorDistance) { // Go toward Prey
     targetLoc = nearestPrey
   } else { // Go away from Predator
-    targetLoc = nearestPredator
+    targetLoc = [-nearestPredator[0],-nearestPredator[1]]
   }
 
   targetLocDistance = distance(animalPosition, targetLoc)
@@ -60,11 +60,18 @@ function animalAI(gameData, animalIdx){
 
   var predators = []
   var prey = []
-
+  // console.log(animalStats)
   for(var i=0;i<gameData.length;i++){
     if(i == animalIdx) continue
 
     distanceToAnimal = distance(animalXY, getAnimalXY(gameData, i))
+    // console.log(gameData[i])
+
+    if (distanceToAnimal < animalData["attackDist"] && gameData[i].stats.health != -Infinity) {
+      killAnimal(gameData, i)
+      animalStats.saturation = 20.0
+      break
+    }
     if (distanceToAnimal > animalData["viewDist"]) continue
     
     if( animalData["predators"].includes( tiles[gameData[i].tileId] ) ){
@@ -73,6 +80,10 @@ function animalAI(gameData, animalIdx){
 
     if( animalData["prey"].includes( tiles[gameData[i].tileId] ) ){
       prey.push(getAnimalXY(gameData, i))
+    }
+
+    if( animalStats.saturation > 15 && rand(0,10) == 0 ) {
+      newAnimal(animalXY, animalData.tileId)
     }
 
   }
@@ -92,6 +103,7 @@ function animalAI(gameData, animalIdx){
 
 function calcAnimalStats(gameData, animalIdx, xyChange){
   var [animalData, animalStats] = getAnimalInfo(gameData, animalIdx)
+  if(gameData[animalIdx].tileId == 0) return
 
   animalStats.exhaustion += round( (xyChange[0]+xyChange[1] + 10) / animalData["stamina"] , 2)
   
@@ -113,6 +125,12 @@ function calcAnimalStats(gameData, animalIdx, xyChange){
     animalStats.health -= round( animalStats.saturation/20 + 2 / animalData["stamina"] , 2)
   }
   
+}
+
+function killAnimal(tileList, tileI){
+  tileList[tileI].tileRef.style.scale = 0
+  setTimeout(function(tile){ tile.tileRef.remove(); tileList.splice(tileList.indexOf(tile), 1) } , 1000, tileList[tileI])
+  tileList[tileI].stats.health = -Infinity
 }
 
 function tick(){

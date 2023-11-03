@@ -28,13 +28,19 @@ ghostTile.style.setProperty("z-index", 5)
 ghostTile.style.setProperty("opacity", 0.6)
 mainElem.appendChild(ghostTile)
 
-ghostMainElem.onclick = function(e){
-  tile = document.createElement("img")
-  var tileId = setTileSrc(tile)
+function newAnimal(e, tileId){
+  var tile = document.createElement("img")
+  if(tileId == -1) {
+    var tileId = setTileSrc(tile)
+  }
   tile.draggable = false
   moveTileToMouse(tile, e)
   tileList.push( new Animal( tile, tileId ) )
   mainElem.appendChild(tile)
+}
+
+ghostMainElem.onclick = function(e){  
+  newAnimal(e, -1)
 }
 
 ghostMainElem.onmousemove = function(e){
